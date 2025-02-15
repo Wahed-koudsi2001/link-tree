@@ -42,12 +42,11 @@ main .first .one {
 main .first .two .name {
     font-weight: 600;
     font-size: 35px;
-    margin-bottom: 5px;
     display: block;
 }
 main .first .two .job-title {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
 }
 main .three {
     margin-top: 50px;
