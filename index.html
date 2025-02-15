@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>م. عزام طراد</title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <main>
+        <div class="first">
+            <div class="one">
+                <div class="logo">
+                    <img src="logo.png" alt="logo">
+                </div>
+                <div class="two">
+                    <span class="name">م. عزام طراد</span>
+                    <div class="job-title">مدير عام</div>
+                </div>
+            </div>
+            <div class="three">
+                <a href="mailto:azzam.trad@aka-contracting.com">
+                    <img src="icons/mail.png" alt="icon">
+                </a>
+                <a href="tel:966569339964">
+                    <img src="icons/phone-call.png" alt="icon">
+                </a>
+            </div>
+        </div>
+        <div class="seconde">
+            <a href="tel:966569339964" onclick="saveContact(event)">
+                <img src="icons/add.png" alt="icon">
+                <span>حفظ الرقم</span>
+            </a>
+        </div>
+        <div class="third">
+            <a href="tel:966569339964" class="box">
+                <img src="icons/smartphone.png" alt="icon">
+                <div>
+                    <span class="number" dir="ltr">+966 56 933 9964</span>
+                    <span class="phonenumber">رقم الجوال</span>
+                </div>
+            </a>
+            <a href="mailto:azzam.trad@aka-contracting.com" class="box">
+                <img src="icons/email-2.png" alt="icon">
+                <div>
+                    <span class="number">azzam.trad@aka-contracting.com</span>
+                    <span class="phonenumber">البريد الالكتروني</span>
+                </div>
+            </a>
+            <a href="" class="box">
+                <img src="icons/pin.png" alt="icon">
+                <div>
+                    <span class="number">P.O. Box 7809 - Riyadh 12834</span>
+                    <span class="phonenumber">اللوكيشن</span>
+                </div>
+            </a>
+            <a href="https://aka-contracting.com/ar/" target="_blank" class="box">
+                <img src="icons/internet.png" alt="icon">
+                <div>
+                    <span class="number">aka-contracting.com</span>
+                    <span class="phonenumber">الموقع الرسمي</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        function saveContact(event) {
+            event.preventDefault();
+
+            // Extract phone number from href
+            const phoneNumber = event.currentTarget.href.split(':')[1];
+
+            // Ask for contact name
+            const contactName = prompt('أدخل اسم جهة الاتصال:', 'جهة اتصال جديدة');
+
+            if (contactName === null) return; // If user cancels
+
+            // Create vCard content
+            const vCard = `BEGIN:VCARD
+    VERSION:3.0
+    FN:${contactName}
+    TEL;TYPE=CELL:${phoneNumber}
+    END:VCARD`;
+
+            // Create downloadable file
+            const blob = new Blob([vCard], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+
+            // Create temporary link to trigger download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = `${contactName}.vcf`;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+
+            // Cleanup
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+
+</html>
