@@ -24,7 +24,7 @@ main {
 main .first {
     display: flex;
     flex-direction: column;
-    background-color: #646464;
+    background-color: #05352b;
     padding: 20px;
     color: #fff;
 }
